@@ -1,0 +1,118 @@
+@media only screen and (max-device-width: 992px) {
+  .logo {
+    margin-left: 75px;
+    padding: 20px;
+  }
+  
+  /* .banner {
+    margin-right: 100px;
+    margin-left: 100px;
+  } */
+  .banner-text {
+    margin-top: 60px;
+  }
+  .judul-banner {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 33px;
+    color: #ee770a;
+  }
+  
+  .sub-judul {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: justify;
+    color: #000000;
+  }
+  
+  .mulai-test {
+    background: #f08519;
+    border-radius: 15px;
+    width: 250px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #130f49;
+    margin-top: -20px;
+    margin-bottom: 60px;
+  }
+
+  .mybutton {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .partner {
+    margin-bottom: 40px;
+  }
+  
+  .image {
+    margin-top: 50px;
+  }
+
+}
+
+
+
+
+@media screen and (min-width: 992px) {
+  .logo {
+    margin-left: 20px;
+    padding: 20px;
+  }
+
+  .banner {
+    margin: auto;
+  }
+  .banner-text {
+    margin-top: 150px;
+  }
+  .judul-banner {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 33px;
+    color: white;
+  }
+
+  .sub-judul {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: justify;
+    color: #000000;
+  }
+
+  .mulai-test {
+    background: #f08519;
+    border-radius: 15px;
+    width: 250px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #130f49;
+    margin-top: 10px;
+    margin-left: -15px;
+  }
+
+  .image {
+    margin-top: 50px;
+  }
+
+  .partner {
+    margin-top: 50px;
+  }
+ 
+}

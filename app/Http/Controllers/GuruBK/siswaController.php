@@ -29,7 +29,7 @@ class siswaController extends Controller
         ])->when($request->cari, function ($query) use ($request) {
             return $query->where('nama', 'LIKE', "%" . $request->cari . "%")
                 ->orWhere('nisn', 'LIKE', "%" . $request->cari . "%");
-        })->paginate(8);
+        })->paginate(10);
 
         return view('GuruBK.Siswa.index', compact('data', 'sekolah'));
     }

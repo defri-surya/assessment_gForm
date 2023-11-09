@@ -36,7 +36,7 @@ class siswaController extends Controller
 
     public function refresh()
     {
-        $sheetdb = new SheetDB('lb2w3yb4j3j8j');
+        $sheetdb = new SheetDB('4q9p0ry273zuy');
         $dataFromGoogleSheets = $sheetdb->get();
         // dd($dataFromGoogleSheets);
 
@@ -45,18 +45,26 @@ class siswaController extends Controller
             $existingData = User::where('nisn', $row->{'Nomor NISN'})->first();
 
             if (!$existingData) {
+                // Cari ID sekolah berdasarkan nama sekolah
+                $sekolah = Sekolah::where('namasekolah', $row->Sekolah)->first();
+                $sekolahId = $sekolah ? $sekolah->id : null;
+
+                // Cari ID afiliator berdasarkan nama psikolog
+                $afiliator = User::where('nama', $row->Psikolog)->where('role', 'afiliator')->first();
+                $afiliatorId = $afiliator ? $afiliator->id : null;
+
                 // Jika data tidak ada dalam database, simpan data baru
                 User::create([
                     'nisn' => $row->{'Nomor NISN'},
                     'nama' => $row->{'Nama Lengkap'},
                     'jeniskelamin' => $row->{'Jenis Kelamin'},
-                    'tanggallahir' => Carbon::parse($row->{'Tanggal Lahir'})->format('Y-m-d'),
+                    'tanggallahir' => Carbon::createFromFormat('d/m/Y', $row->{'Tanggal Lahir'})->format('Y-m-d'),
                     'username' => $row->{'Nomor NISN'},
                     'password' => bcrypt($row->{'Nomor NISN'}),
                     'role' => 'siswa',
                     'status' => 'aktif',
-                    'sekolahid' => 3,
-                    'afiliatorid' => 2,
+                    'sekolahid' => $sekolahId,
+                    'afiliatorid' => $afiliatorId,
                 ]);
             }
         }

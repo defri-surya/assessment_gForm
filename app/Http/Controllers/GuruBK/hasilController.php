@@ -21,10 +21,10 @@ class hasilController extends Controller
      */
     public function index(Request $request)
     {
-        $data = hasilakhir::where('sekolahid', auth()->user()->sekolahid)->when($request->cari, function ($query) use ($request){
-            return $query->where('nama', 'LIKE', "%".$request->cari."%")
-                         ->orWhere('nisn', 'LIKE', "%".$request->cari."%");
-        })->paginate(8);
+        $data = hasilakhir::where('sekolahid', auth()->user()->sekolahid)->when($request->cari, function ($query) use ($request) {
+            return $query->where('nama', 'LIKE', "%" . $request->cari . "%")
+                ->orWhere('nisn', 'LIKE', "%" . $request->cari . "%");
+        })->paginate(10);
         return view('GuruBK.Hasil.index', compact('data'));
     }
 
@@ -67,7 +67,7 @@ class hasilController extends Controller
 
         // dd($datates);
 
-        if($hasilsemua->sekolahid != auth()->user()->sekolahid){
+        if ($hasilsemua->sekolahid != auth()->user()->sekolahid) {
             Alert::warning('Peringatan', 'Bukan id Siswa Anda');
             return redirect()->back();
         }
@@ -96,27 +96,27 @@ class hasilController extends Controller
             $div_S_Most = $hasilsemua['S_MOST'] - $hasilsemua['S_LEST'],
             $div_C_Most = $hasilsemua['C_MOST'] - $hasilsemua['C_LEST'],
         ];
-        
-        $dif = json_encode($d);       
+
+        $dif = json_encode($d);
 
 
-       // rumus Most
-       $MD = RumusMost::where('nilai', $hasilsemua['D_MOST'])->first();
-       $MI = RumusMost::where('nilai', $hasilsemua['I_MOST'])->first();
-       $MS = RumusMost::where('nilai', $hasilsemua['S_MOST'])->first();
-       $MC = RumusMost::where('nilai', $hasilsemua['C_MOST'])->first();
+        // rumus Most
+        $MD = RumusMost::where('nilai', $hasilsemua['D_MOST'])->first();
+        $MI = RumusMost::where('nilai', $hasilsemua['I_MOST'])->first();
+        $MS = RumusMost::where('nilai', $hasilsemua['S_MOST'])->first();
+        $MC = RumusMost::where('nilai', $hasilsemua['C_MOST'])->first();
 
-       // Rumus Lest
-       $LD = RumusLest::where('nilai', $hasilsemua['D_LEST'])->first();
-       $LI = RumusLest::where('nilai', $hasilsemua['I_LEST'])->first();
-       $LS = RumusLest::where('nilai', $hasilsemua['S_LEST'])->first();
-       $LC = RumusLest::where('nilai', $hasilsemua['C_LEST'])->first();
+        // Rumus Lest
+        $LD = RumusLest::where('nilai', $hasilsemua['D_LEST'])->first();
+        $LI = RumusLest::where('nilai', $hasilsemua['I_LEST'])->first();
+        $LS = RumusLest::where('nilai', $hasilsemua['S_LEST'])->first();
+        $LC = RumusLest::where('nilai', $hasilsemua['C_LEST'])->first();
 
-       // Rumas Dif
-       $DD = RumusDif::where('nilai', $div_D_Most)->first();
-       $DI = RumusDif::where('nilai', $div_I_Most)->first();
-       $DS = RumusDif::where('nilai', $div_S_Most)->first();
-       $DC = RumusDif::where('nilai', $div_C_Most)->first();
+        // Rumas Dif
+        $DD = RumusDif::where('nilai', $div_D_Most)->first();
+        $DI = RumusDif::where('nilai', $div_I_Most)->first();
+        $DS = RumusDif::where('nilai', $div_S_Most)->first();
+        $DC = RumusDif::where('nilai', $div_C_Most)->first();
 
 
         $D_MOST = 0;
@@ -133,70 +133,70 @@ class hasilController extends Controller
         $C_DIF = 0;
 
         // most
-        if($MD['D'] > 0){
+        if ($MD['D'] > 0) {
             $D_MOST = $MD['D'];
         }
-        if($MI['I'] > 0){
+        if ($MI['I'] > 0) {
             $I_MOST = $MI['I'];
         }
-        if($MS['S'] > 0){
+        if ($MS['S'] > 0) {
             $S_MOST = $MS['S'];
         }
-        if($MC['C'] > 0){
+        if ($MC['C'] > 0) {
             $C_MOST = $MC['C'];
         }
         // lest
-        if($LD['D'] > 0){
+        if ($LD['D'] > 0) {
             $D_LEST = $LD['D'];
         }
-        if($LI['I'] > 0){
+        if ($LI['I'] > 0) {
             $I_LEST = $LI['I'];
         }
-        if($LS['S'] > 0){
+        if ($LS['S'] > 0) {
             $S_LEST = $LS['S'];
         }
-        if($LC['C'] > 0){
+        if ($LC['C'] > 0) {
             $C_LEST = $LC['C'];
         }
 
         // dif
-        if($DD['D'] > 0){
+        if ($DD['D'] > 0) {
             $D_DIF = $DD['D'];
         }
-        if($DI['I'] > 0){
+        if ($DI['I'] > 0) {
             $I_DIF = $DI['I'];
         }
-        if($DS['S'] > 0){
+        if ($DS['S'] > 0) {
             $S_DIF = $DS['S'];
         }
-        if($DC['C'] > 0){
+        if ($DC['C'] > 0) {
             $C_DIF = $DC['C'];
         }
 
 
-    //   $datamost = [
-    //      'D' => $MD['D'],
-    //      'I' => $MI['I'],
-    //      'S' => $MS['S'],
-    //      'C' => $MC['C'],
-    //   ];
-    //   arsort($datamost);
+        //   $datamost = [
+        //      'D' => $MD['D'],
+        //      'I' => $MI['I'],
+        //      'S' => $MS['S'],
+        //      'C' => $MC['C'],
+        //   ];
+        //   arsort($datamost);
 
-    //   $datalest = [
-    //       'D' => $LD['D'],
-    //       'I' => $LI['I'],
-    //       'S' => $LS['S'],
-    //       'C' => $LC['C'],
-    //    ];
-    //    arsort($datalest);
+        //   $datalest = [
+        //       'D' => $LD['D'],
+        //       'I' => $LI['I'],
+        //       'S' => $LS['S'],
+        //       'C' => $LC['C'],
+        //    ];
+        //    arsort($datalest);
 
-    //    $datadif = [
-    //       'D' => $DD['D'],
-    //       'I' => $DI['I'],
-    //       'S' => $DS['S'],
-    //       'C' => $DC['C'],
-    //    ];
-    //    arsort($datadif);
+        //    $datadif = [
+        //       'D' => $DD['D'],
+        //       'I' => $DI['I'],
+        //       'S' => $DS['S'],
+        //       'C' => $DC['C'],
+        //    ];
+        //    arsort($datadif);
 
         $datamost = [
             'D' => $D_MOST,
@@ -224,30 +224,30 @@ class hasilController extends Controller
 
         // dd($datadif);
 
-         $most3besar = array_slice($datamost, 0, 3, true);
-         $lest3terbesar = array_slice($datalest, 0, 3, true);
-         $dif3besar = array_slice($datadif, 0, 3, true);
-        
-         $finalmost = array_diff($most3besar, [0]);
-         $finallest = array_diff($lest3terbesar, [0]);
-         $finaldif = array_diff($dif3besar, [0]);
-         
-         $flipmost = array_flip($finalmost);
-         $mostfix = implode(",",$flipmost);
+        $most3besar = array_slice($datamost, 0, 3, true);
+        $lest3terbesar = array_slice($datalest, 0, 3, true);
+        $dif3besar = array_slice($datadif, 0, 3, true);
 
-         $fliplest = array_flip($finallest);
-         $lestfix = implode(",",$fliplest);
+        $finalmost = array_diff($most3besar, [0]);
+        $finallest = array_diff($lest3terbesar, [0]);
+        $finaldif = array_diff($dif3besar, [0]);
 
-         $flipdif = array_flip($finaldif);
-         $diffix = implode(",",$flipdif);
+        $flipmost = array_flip($finalmost);
+        $mostfix = implode(",", $flipmost);
+
+        $fliplest = array_flip($finallest);
+        $lestfix = implode(",", $fliplest);
+
+        $flipdif = array_flip($finaldif);
+        $diffix = implode(",", $flipdif);
 
 
-         $kepmost = kepribadian::where('typekepribadian', $mostfix)->first();
-         $keplest = kepribadian::where('typekepribadian', $lestfix)->first();
-         $kepdif = kepribadian::where('typekepribadian', $diffix)->first();
-        
+        $kepmost = kepribadian::where('typekepribadian', $mostfix)->first();
+        $keplest = kepribadian::where('typekepribadian', $lestfix)->first();
+        $kepdif = kepribadian::where('typekepribadian', $diffix)->first();
+
         //  dd($finalmost);
-        
+
         return view('GuruBK.Hasil.show', compact('most', 'lest', 'dif', 'hasilsemua', 'kepmost', 'keplest', 'kepdif'));
     }
 

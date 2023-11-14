@@ -23,7 +23,7 @@ class allReportController extends Controller
             return $query->where('nama', 'LIKE', "%" . $request->cari . "%")
                 ->orWhere('nisn', 'LIKE', "%" . $request->cari . "%")
                 ->orWhere('namasekolah', 'LIKE', "%" . $request->cari . "%");
-        })->paginate(8);
+        })->paginate(10);
         return view('Afiliator.HasilDisc.index', compact('data'));
     }
 

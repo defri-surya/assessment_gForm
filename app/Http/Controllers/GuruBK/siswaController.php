@@ -157,7 +157,7 @@ class siswaController extends Controller
         if ($siswa->nisn == $request->nisn) {
             $request->request->add(['username' => $request->nisn]);
             $request->request->add(['password' => bcrypt($request->nisn)]);
-            // $request->request->add(['status' => 'aktif']);
+            $request->request->add(['status' => 'aktif']);
             $request->request->add(['role' => 'siswa']);
             $request->request->add(['sekolahid' => auth()->user()->sekolahid]);
             $request->request->add(['afiliatorid' => auth()->user()->afiliatorid]);
@@ -175,7 +175,7 @@ class siswaController extends Controller
             }
             $request->request->add(['username' => $request->nisn]);
             $request->request->add(['password' => bcrypt($request->nisn)]);
-            // $request->request->add(['status' => 'aktif']);
+            $request->request->add(['status' => 'aktif']);
             $request->request->add(['role' => 'siswa']);
             $request->request->add(['sekolahid' => auth()->user()->sekolahid]);
             $request->request->add(['afiliatorid' => auth()->user()->afiliatorid]);
